@@ -1,5 +1,4 @@
-JOVON DATABASE SYSTEM
-=====================
+JOVON DATABASE
 
 [SYSTEM USAGE DOCS](https://yildirimt.github.io/jvdbase/)
 
