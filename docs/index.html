@@ -1,0 +1,159 @@
+<html>
+<head>
+  <title>JVDBASE - SYSTEM COMMANDS USAGE DOCUMENTATION</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h3>JOVON DOCUMENTS</h3>
+  <div class="docs">
+    <a href="doc_tr.html">tr</a>
+    <a href="index.html">eng</a>
+  </div>
+
+  <div class="section">
+    <h3>HEADER QUERIES</h3>
+    <a href="#base-q">DATABASE - QUERIES</a>&nbsp;&nbsp;&nbsp;
+    <a href="#table-q">TABLE - QUERIES</a><br>
+    <a href="#datastr-q">DATASTR - QUERIES</a>&nbsp;&nbsp;&nbsp;
+    <a href="#datamng-q">DATA MANAGEMENT - QUERIES</a><br><br>
+    <a href="#dtau-q">DATA TYPE AND USAGE</a>&nbsp;&nbsp;&nbsp;
+    <a href="#dsmethods-q">DATA READING METHODS AND USAGE</a><br>
+  </div>
+
+  <div class="section">
+    <h3>HEADER CONTENT</h3>
+    <b>DATABASE QUERY CONTENT</b><br>
+    <a href="#create-base">CREATE DATABASE</a><br>
+    <a href="#del-base">DELETE DATABASE</a><br><br>
+    
+    <b>TABLE QUERY CONTENT</b><br>
+    <a href="#create-table">CREATE TABLE</a><br>
+    <a href="#del-table">DELETE TABLE</a><br><br>
+    
+    <b>DATASTR QUERY CONTENT</b><br>
+    <a href="#datastr-q">CREATE DATASTR</a><br>
+    <a href="#create-in-datastr">CREATE DATASTR WITHIN TABLE CREATION QUERY</a><br>
+    <a href="#del-datastr">DELETE DATASTR</a><br><br>
+    
+    <b>DATA MANAGEMENT QUERY CONTENT</b><br>
+    <a href="#datamng-q">INSERT DATA</a><br>
+    <a href="#del-data">DELETE DATA</a><br>
+    <a href="#select-data">SELECT DATA</a><br>
+  </div>
+
+  <div class="section" id="base-q">
+    <h3>DATABASE QUERIES</h3>
+    <h4 id="create-base">CREATE DATABASE</h4>
+    <div class="cmd">
+      CREATE-BASE->[<span class="parameter">BASE_NAME</span>]
+    </div><br><br>
+    <span>The "BASE_NAME" parameter specifies the name of the database to be created</span><br><br>
+
+    <h4 id="del-base">DELETE DATABASE</h4>
+    <div class="cmd">
+      DEL-BASE->[<span class="parameter">BASE_NAME</span>]
+    </div><br><br>
+    <span>The "BASE_NAME" parameter specifies the name of the database to be deleted</span>
+  </div>
+
+  <div class="section" id="table-q">
+    <h3 id="create-in-datastr">TABLE QUERIES</h3>
+    <h4 id="create-table">CREATE TABLE</h4>
+    <div class="cmd">
+      CREATE-TABLE-><br>
+      [<br>
+      BASE-NAME-><span class="parameter">BASE_NAME</span><br>
+      TABLE-NAME-><span class="parameter">TABLE_NAME</span><br>
+      CREATE-DATASTR-><span class="parameter">DATASTR_NAME</span><br>
+      CREATE-DATASTR-><span class="parameter">DATASTR_NAME</span><br>
+      ]
+    </div><br><br>
+    <span>"BASE_NAME" specifies which database the table will be created in<br><br>"TABLE_NAME" specifies the name of the table<br><br>"CREATE-DATASTR->" is optional (can be repeated or omitted). This creates a datastr named "DATASTR_NAME"</span>
+
+    <h4 id="del-table">DELETE TABLE</h4>
+    <div class="cmd">
+      DEL-TABLE->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" specifies which database the table belongs to<br><br>"TABLE_NAME" specifies the name of the table to be deleted</span>
+  </div>
+
+  <div class="section" id="datastr-q">
+    <h3>DATASTR QUERIES</h3>
+    <h4>CREATE DATASTR</h4>
+    <div class="cmd">
+      CREATE-DATASTR->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA_TYPE</span>]
+    </div><br><br>
+    <span>"BASE_NAME" specifies which database the datastr will belong to<br><br>"TABLE_NAME" specifies which table the datastr will be in<br><br>"DATASTR_NAME" specifies the name of the datastr<br><br>"DATA_TYPE" specifies the data type that the datastr will hold</span>
+
+    <h4 id="del-datastr">DELETE DATASTR</h4>
+    <div class="cmd">
+      DEL-DATASTR->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" specifies the database the datastr belongs to<br><br>"TABLE_NAME" specifies the table the datastr belongs to<br><br>"DATASTR_NAME" specifies the name of the datastr to be deleted</span>
+  </div>
+
+  <div class="section" id="datamng-q">
+    <h3>DATA MANAGEMENT QUERIES</h3>
+    <h4>INSERT DATA</h4>
+    <div class="cmd">
+      INSERT-DATA->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA</span>]
+    </div><br><br>
+    <span>"BASE_NAME" specifies the database where the data will be inserted<br><br>"TABLE_NAME" specifies the table where the data will be inserted<br><br>"DATASTR_NAME" specifies the datastr where the data will be inserted<br><br>"DATA" specifies the data to be inserted</span>
+
+    <h4 id="del-data">DELETE DATA</h4>
+    <div class="cmd">
+      DEL-DATA->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA_SECTION_METHODS</span>]
+    </div><br><br>
+    <span>"BASE_NAME" specifies the database the data belongs to<br><br>"TABLE_NAME" specifies the table the data belongs to<br><br>"DATASTR_NAME" specifies the datastr the data belongs to<br><br>"DATA_SECTION_METHODS" specifies the method used to delete the data</span>
+
+    <h4 id="select-data">SELECT DATA</h4>
+    <div class="cmd">
+      SELECT-DATA->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA_SECTION_METHODS</span>]
+    </div><br><br>
+    <span>"BASE_NAME" specifies the database the data belongs to<br><br>"TABLE_NAME" specifies the table the data belongs to<br><br>"DATASTR_NAME" specifies the datastr the data belongs to<br><br>"DATA_SECTION_METHODS" specifies the method used to select the data</span>
+  </div>
+
+  <hr>
+  <div class="section" id="dtau-q">
+    <h3>DATA TYPE AND USAGE</h3>
+    <h4>DATA TYPES</h4>
+    <div class="cmd">
+      For BOOL type use "<span class="parameter2">10*</span>"<br>
+      For INT type use "<span class="parameter2">I*</span>"<br>
+      For CHAR type use "<span class="parameter2">'*</span>"<br>
+      For STRING type use "<span class="parameter2">~*</span>"
+    </div><br><br>
+    <span>The example below inserts 12 (INT) into a datastr named TEST_DATASTR</span><br>
+    <div class="cmd">
+      INSERT-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">*I</span><span class="parameter">12</span>]
+    </div>
+    <h5 class="warning">Data type indicators (10*, I*, '*, ~*) are only used in insert queries. They are not needed in other types of queries.</h5>
+  </div>
+
+  <div class="section" id="dsmethods-q">
+    <h3>DATA READING METHODS AND USAGE</h3>
+    <h4>READING METHODS</h4>
+    <div class="cmd">
+      Reading by INDEX number "<span class="parameter2">INDEX#</span><span class="parameter">INDEX_VALUE</span><br>
+      Reading by first match "<span class="parameter2">FIRST-MATCH#</span><span class="parameter">DATA</span>"<br>
+      Reading by all matches "<span class="parameter2">MATCH#</span><span class="parameter">DATA</span>"
+    </div><br><br>
+
+    <span>The example below deletes all values in TEST_DATASTR that match the string "hello system"</span><br>
+    <div class="cmd">
+      DEL-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">MATCH#</span><span class="parameter">hello system</span>]
+    </div><br><br>
+    
+    <span>The example below selects the first value matching "true" (bool) in TEST_DATASTR</span><br>
+    <div class="cmd">
+      SELECT-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">FIRST-MATCH#</span><span class="parameter">true</span>]
+    </div><br><br>
+
+    <span>The example below deletes the first value (INDEX 0) in TEST_DATASTR</span><br>
+    <div class="cmd">
+      DEL-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">INDEX#</span><span class="parameter">0</span>]
+    </div>
+    <h5 class="warning">Data type indicators (10*, I*, '*, ~*) are only used in insert queries. They are not needed in other types of queries.</h5>
+  </div>
+</body>
+</html>

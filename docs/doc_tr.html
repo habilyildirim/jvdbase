@@ -1,0 +1,159 @@
+<html>
+<head>
+  <title>JVDBASE - SİSTEM KOMUTLARI KULLANIM DÖKÜMANI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h3>JOVON DÖKÜMANLAR</h3>
+  <div class="docs">
+    <a href="doc_tr.html">tr</a>
+    <a href="index.html">eng</a>
+  </div>
+
+  <div class="section">
+    <h3>BAŞLIK SORGULARI</h3>
+    <a href="#base-q">VERİ TABANI - SORGULAR</a>&nbsp;&nbsp;&nbsp;
+    <a href="#table-q">TABLO - SORGULAR</a><br>
+    <a href="#datastr-q">DATASTR - SORGULAR</a>&nbsp;&nbsp;&nbsp;
+    <a href="#datamng-q">VERİ YÖNETİMİ - SORGULAR</a><br><br>
+    <a href="#dtau-q">VERİ TİPİ VE KULLANIMI</a>&nbsp;&nbsp;&nbsp;
+    <a href="#dsmethods-q">VERİ OKUMA YÖNTEMLERİ VE KULLANIMI</a><br>
+  </div>
+
+  <div class="section">
+    <h3>BAŞLIK İÇERİĞİ</h3>
+    <b>VERİ TABANI SORGULARI İÇERİĞİ</b><br>
+    <a href="#create-base">VERİ TABANI OLUŞTUR</a><br>
+    <a href="#del-base">VERİ TABANI SİL</a><br><br>
+    
+    <b>TABLO SORGULARI İÇERİĞİ</b><br>
+    <a href="#create-table">TABLO OLUŞTUR</a><br>
+    <a href="#del-table">TABLO SİL</a><br><br>
+    
+    <b>DATASTR SORGULARI İÇERİĞİ</b><br>
+    <a href="#datastr-q">DATASTR OLUŞTUR</a><br>
+    <a href="#create-in-datastr">TABLO OLUŞTURMA SORGUSU İÇİNDE DATASTR OLUŞTUR</a><br>
+    <a href="#del-datastr">DATASTR SİL</a><br><br>
+    
+    <b>VERİ YÖNETİMİ SORGULARI İÇERİĞİ</b><br>
+    <a href="#datamng-q">VERİ EKLE</a><br>
+    <a href="#del-data">VERİ SİL</a><br>
+    <a href="#select-data">VERİ SEÇ</a><br>
+  </div>
+
+  <div class="section" id="base-q">
+    <h3>VERİ TABANI SORGULARI</h3>
+    <h4 id="create-base">VERİ TABANI OLUŞTUR</h4>
+    <div class="cmd">
+      CREATE-BASE->[<span class="parameter">BASE_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi oluşturulacak veri tabanını belirtir</span><br><br>
+
+    <h4 id="del-base">VERİ TABANI SİL</h4>
+    <div class="cmd">
+      DEL-BASE->[<span class="parameter">BASE_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi silinecek veri tabanını belirtir</span>
+  </div>
+
+  <div class="section" id="table-q">
+    <h3 id="create-in-datastr">TABLO SORGULARI</h3>
+    <h4 id="create-table">TABLO OLUŞTUR</h4>
+    <div class="cmd">
+      CREATE-TABLE-><br>
+      [<br>
+      BASE-NAME-><span class="parameter">BASE_NAME</span><br>
+      TABLE-NAME-><span class="parameter">TABLE_NAME</span><br>
+      CREATE-DATASTR-><span class="parameter">DATASTR_NAME</span><br>
+      CREATE-DATASTR-><span class="parameter">DATASTR_NAME</span><br>
+      ]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi tablonun hangi veri tabanında oluşturulacağını belirtir<br><br>"TABLE_NAME" parametresi tablonun ismini belirtir<br><br>"CREATE-DATASTR->" isteği opsiyoneldir (isteğe bağlı olarak çoğaltılabilir veya hiç yazılmayabilir). Bu istek, "DATASTR_NAME" adında bir datastr oluşturur</span>
+
+    <h4 id="del-table">TABLO SİL</h4>
+    <div class="cmd">
+      DEL-TABLE->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi tablonun hangi veri tabanında olduğunu belirtir<br><br>"TABLE_NAME" parametresi silinecek tablonun adını belirtir</span>
+  </div>
+
+  <div class="section" id="datastr-q">
+    <h3>DATASTR SORGULARI</h3>
+    <h4>DATASTR OLUŞTUR</h4>
+    <div class="cmd">
+      CREATE-DATASTR->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA_TYPE</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi datastr yapısının hangi veri tabanında olacağını belirtir<br><br>"TABLE_NAME" parametresi datastr yapısının hangi tabloda olacağını belirtir<br><br>"DATASTR_NAME" parametresi datastr yapısının adını belirtir<br><br>"DATA_TYPE" parametresi datastr yapısının hangi veri türünü tutacağını belirtir</span>
+
+    <h4 id="del-datastr">DATASTR SİL</h4>
+    <div class="cmd">
+      DEL-DATASTR->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi datastr yapısının hangi veri tabanında olduğunu belirtir<br><br>"TABLE_NAME" parametresi datastr yapısının hangi tabloda olduğunu belirtir<br><br>"DATASTR_NAME" parametresi datastr yapısının adını belirtir</span>
+  </div>
+
+  <div class="section" id="datamng-q">
+    <h3>VERİ YÖNETİMİ SORGULARI</h3>
+    <h4>VERİ EKLE</h4>
+    <div class="cmd">
+      INSERT-DATA->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi verinin hangi veri tabanına ekleneceğini belirtir<br><br>"TABLE_NAME" parametresi verinin hangi tabloya ekleneceğini belirtir<br><br>"DATASTR_NAME" parametresi verinin hangi datastr yapısına ekleneceğini belirtir<br><br>"DATA" parametresi eklenecek veriyi belirtir</span>
+
+    <h4 id="del-data">VERİ SİL</h4>
+    <div class="cmd">
+      DEL-DATA->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA_SECTION_METHODS</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi silinecek verinin hangi veri tabanında olduğunu belirtir<br><br>"TABLE_NAME" parametresi silinecek verinin hangi tabloda olduğunu belirtir<br><br>"DATASTR_NAME" parametresi silinecek verinin hangi datastr yapısında olduğunu belirtir<br><br>"DATA_SECTION_METHODS" parametresi verinin hangi yöntemle silineceğini belirtir</span>
+
+    <h4 id="select-data">VERİ SEÇ</h4>
+    <div class="cmd">
+      SELECT-DATA->[<span class="parameter">BASE_NAME</span>,<span class="parameter">TABLE_NAME</span>,<span class="parameter">DATASTR_NAME</span>,<span class="parameter">DATA_SECTION_METHODS</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi seçilecek verinin hangi veri tabanında olduğunu belirtir<br><br>"TABLE_NAME" parametresi seçilecek verinin hangi tabloda olduğunu belirtir<br><br>"DATASTR_NAME" parametresi seçilecek verinin hangi datastr yapısında olduğunu belirtir<br><br>"DATA_SECTION_METHODS" parametresi verinin hangi yöntemle seçileceğini belirtir</span>
+  </div>
+
+  <hr>
+  <div class="section" id="dtau-q">
+    <h3>VERİ TİPİ VE KULLANIMI</h3>
+    <h4>VERİ TİPLERİ</h4>
+    <div class="cmd">
+      BOOL veri tipi için "<span class="parameter2">10*</span>"<br>
+      INT veri tipi için "<span class="parameter2">I*</span>"<br>
+      CHAR veri tipi için "<span class="parameter2">'*</span>"<br>
+      STRING veri tipi için "<span class="parameter2">~*</span>"
+    </div><br><br>
+    <span>Aşağıdaki örnek kullanım TEST_DATASTR isimli datastr yapısına 12 (INT) verisini ekler</span>
+    <div class="cmd">
+      INSERT-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">*I</span><span class="parameter">12</span>]
+    </div>
+    <h5 class="warning">Veri tipi belirteçleri(10*, I*, '*, ~*) sadece veri ekleme sorgularında kullanılır. Diğer sorgularda kullanılması gerekmez</h5>
+  </div>
+
+  <div class="section" id="dsmethods-q">
+    <h3>VERİ OKUMA YÖNTEMLERİ VE KULLANIMI</h3>
+    <h4>OKUMA YÖNTEMLERİ</h4>
+    <div class="cmd">
+      INDEX numarası ile okuma "<span class="parameter2">INDEX#</span><span class="parameter">INDEX_VALUE</span><br>
+      İlk eşleşmeyi sorgulayarak okuma "<span class="parameter2">FIRST-MATCH#</span><span class="parameter">DATA</span>"<br>
+      Tüm eşleşmeleri sorgulayarak okuma "<span class="parameter2">MATCH#</span><span class="parameter">DATA</span>"
+    </div><br><br>
+
+    <span>Aşağıdaki örnek, TEST_DATASTR isimli datastr içinde "hello system" (string) verisiyle eşleşen tüm verileri siler</span><br>
+    <div class="cmd">
+      DEL-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">MATCH#</span><span class="parameter">hello system</span>]
+    </div><br><br>
+    
+    <span>Aşağıdaki örnek, TEST_DATASTR datastr'ında "true" (bool) verisiyle eşleşen ilk veriyi seçer</span><br>
+    <div class="cmd">
+      SELECT-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">FIRST-MATCH#</span><span class="parameter">true</span>]
+    </div><br><br>
+
+    <span>Aşağıdaki örnek, TEST_DATASTR datastr'ındaki ilk veriyi (INDEX 0) siler</span><br>
+    <div class="cmd">
+      DEL-DATA->[<span class="parameter">TEST_BASE</span>,<span class="parameter">TEST_TABLE</span>,<span class="parameter">TEST_DATASTR</span>,<span class="parameter2">INDEX#</span><span class="parameter">0</span>]
+    </div>
+    <h5 class="warning">Veri tipi belirteçleri(10*, I*, '*, ~*) sadece veri ekleme sorgularında kullanılır. Diğer sorgularda kullanılması gerekmez</h5>
+  </div>
+</body>
+</html>

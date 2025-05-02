@@ -1,0 +1,51 @@
+body {
+  	background-color: #eaeaea;
+  	font-family: "Courier New", monospace;
+  	color: #222;
+  	padding: 20px;
+}
+h3 {
+  	border-bottom: 1px dashed #999;
+  	color: #003366;
+}
+h4 {
+  	border-bottom: 1px dashed #999;
+  	color: green;
+}
+.docs a {
+  	margin-right: 10px;
+  	color: #00008b;
+  	text-decoration: none;
+}
+.docs a:hover {
+  	text-decoration: underline;
+}
+.cmd {
+  	background-color: #004d00;
+  	color: white;
+  	display: inline-block;
+  	padding: 10px;
+  	margin: 5px 0;
+  	border-left: 5px solid #00cc00;
+}   
+.parameter {
+ 	color: #ff4040;
+}
+.parameter2{
+	color: lightblue;
+}
+.warning{
+	background-color: yellow;
+	display: inline-block;
+}
+a {
+  	color: #0033cc;
+  	text-decoration: none;
+}
+a:hover {
+  	text-decoration: underline;
+}
+.section {
+  	margin-bottom: 30px;
+}
+
