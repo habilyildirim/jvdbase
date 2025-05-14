@@ -24,7 +24,8 @@
     <h3>SORGU İÇERİKLERİ</h3>
     <b>VERİ TABANI SORGULARI İÇERİĞİ</b><br>
     <a href="#create-base">VERİ TABANI OLUŞTUR</a><br>
-    <a href="#del-base">VERİ TABANI SİL</a><br><br>
+    <a href="#del-base">VERİ TABANI SİL</a><br>
+    <a href="#backup-base">VERİ TABANI YEDEKLEME VE GERİ YÜKLEME</a><br><br>
     
     <b>TABLO SORGULARI İÇERİĞİ</b><br>
     <a href="#create-table">TABLO OLUŞTUR</a><br>
@@ -45,15 +46,27 @@
     <h3>VERİ TABANI SORGULARI</h3>
     <h4 id="create-base">VERİ TABANI OLUŞTUR</h4>
     <div class="cmd">
-      CREATE-BASE->[<span class="parameter">BASE_NAME</span>]
+      CREATE-BASE-><span class="parameter">BASE_NAME</span>
     </div><br><br>
     <span>"BASE_NAME" parametresi oluşturulacak veri tabanını belirtir</span><br><br>
 
     <h4 id="del-base">VERİ TABANI SİL</h4>
     <div class="cmd">
-      DEL-BASE->[<span class="parameter">BASE_NAME</span>]
+      DEL-BASE-><span class="parameter">BASE_NAME</span>
     </div><br><br>
     <span>"BASE_NAME" parametresi silinecek veri tabanını belirtir</span>
+
+    <h4 id="backup-base">VERİ TABANI YEDEKLEME</h4>
+    <div class="cmd">
+      BACKUP-BASE->[<span class="parameter">BASE_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi yedeklenecek veri tabanını belirtir</span>
+
+    <h4 id="">YEDEKLEMEYİ GERİ YÜKLEME</h4>
+    <div class="cmd">
+      LOAD-BASE->[<span class="parameter">BASE_NAME</span>]
+    </div><br><br>
+    <span>"BASE_NAME" parametresi geri yüklenecek yedeği belirtir</span>
   </div>
 
   <div class="section" id="table-q">

@@ -2,19 +2,10 @@ make:
 	g++ interpreter.cpp -Ilib-modules/ -o bin/jovon
 
 run:
-	./bin/jovon query.jnq
-
-mr:
-	g++ interpreter.cpp -Ilib-modules/ -o bin/jovon
-	./bin/jovon query.jnq
-
-cdmr:
-	rm -rf test/*
-	g++ interpreter.cpp -Ilib-modules/ -o bin/jovon
-	./bin/jovon query.jnq
-
-testc:
-	rm -rf test/*
+	sudo ./bin/jovon query.jnq
 
 clean:
 	rm bin/jovon
+	rm -rf test/*
+	rm query.jnq
+	touch query.jnq

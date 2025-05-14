@@ -4,8 +4,9 @@
 #include "datastrlb.h"
 #include "datamnglb.h"
 
-std::string color_success_inter_s = "\033[32m", color_success_inter_f = "\033[0m", color_error_s = "\033[31m", color_error_f = "\033[0m", color_information_s = "\033[44;37m", color_information_f = "\033[0m", color_output_s = "\033[33m", color_output_f = "\033[0m";
-std::string base_path_interpreter = "test/";
+const std::string base_path_interpreter = BASE_PATH;
+uint8_t ssystem_control();
+color_codes_strc color_codes;
 
 std::string join(const std::vector<std::string> & v, const std::string & delimiter = ", ") {
     std::string result;
@@ -15,10 +16,13 @@ std::string join(const std::vector<std::string> & v, const std::string & delimit
     return result;
 }
 
-std::string exists_control_fn(std::string exists_control_fn_parameter_1_base_name, std::string exists_control_fn_parameter_1_table_file){
-	std::string control_table = base_path_interpreter + exists_control_fn_parameter_1_base_name + "/" + exists_control_fn_parameter_1_table_file;
+std::string exists_control_fn(std::string exists_control_fn_parameter_1_base_name, std::string exists_control_fn_parameter_2_table_file, std::string custom = "NULL"){
+	std::string control_table = base_path_interpreter + exists_control_fn_parameter_1_base_name + "/" + exists_control_fn_parameter_2_table_file;
 	std::ifstream control_file(control_table);
-	
+
+	if(custom == "LINUX" && std::filesystem::exists("/opt/" + exists_control_fn_parameter_1_base_name)){return "EXISTS";}
+	else if(custom == "WINDOWS" && std::filesystem::exists("C:/" + exists_control_fn_parameter_1_base_name)){return "EXISTS";}
+					
 	if(!std::filesystem::exists(base_path_interpreter + exists_control_fn_parameter_1_base_name)){return "BASE_NOT_EXISTS";}
 	else if(!std::filesystem::exists(control_table)){return "DATA_NOT_EXISTS";}
 	else{return "DATA_EXISTS";}
@@ -93,13 +97,13 @@ std::string find_parameter_fn(std::string find_parameter_parameter_1_file_line, 
 	else{return join(find_parameter_indep_vector,"");}
 }
 
-void info_msg_fn(std::string info_msg_parameter_1, std::string info_msg_parameter_2, int info_msg_parameter_3_query_num){std::cout << "Q(" << info_msg_parameter_3_query_num << ")" << " " << color_information_s << info_msg_parameter_1 << " = " << info_msg_parameter_2  << color_information_f << "\n";}
+void info_msg_fn(std::string info_msg_parameter_1, std::string info_msg_parameter_2, int info_msg_parameter_3_query_num){std::cout << "Q(" << info_msg_parameter_3_query_num << ")" << " " << color_codes.color_information_s << info_msg_parameter_1 << " = " << info_msg_parameter_2  << color_codes.color_information_f << "\n";}
 
 void error_msg_fn(std::string error_msg_parameter_1, int error_msg_parameter_2, std::string error_msg_parameter_3){
 	error_msg_parameter_2++;
 	
-	if(error_msg_parameter_1 == "ERROR SYNTAX"){std::cout << color_error_s << "LINE " << error_msg_parameter_2 << "; " << error_msg_parameter_1 << " = " << "'" << error_msg_parameter_3 << "'" << color_error_f << "\n";}
-	else{std::cout << color_error_s << "LINE " << error_msg_parameter_2 << "; " << error_msg_parameter_1 << " = " << error_msg_parameter_3 << color_error_f << "\n";}
+	if(error_msg_parameter_1 == "ERROR SYNTAX"){std::cout << color_codes.color_error_s << "LINE " << error_msg_parameter_2 << "; " << error_msg_parameter_1 << " = " << "'" << error_msg_parameter_3 << "'" << color_codes.color_error_f << "\n";}
+	else{std::cout << color_codes.color_error_s << "LINE " << error_msg_parameter_2 << "; " << error_msg_parameter_1 << " = " << error_msg_parameter_3 << color_codes.color_error_f << "\n";}
 }
 
 int main(int argc, char* argv[]){
@@ -109,18 +113,19 @@ int main(int argc, char* argv[]){
 	
 	std::string base_name;
 	std::string info_msg_content;
-	
+
 	main_base_clss main_base_obj;
 	main_table_clss main_table_obj;
 	main_datastr_clss main_datastr_obj;
 	main_datamng_clss main_datamng_obj;
-	selectprc_datamng_clss selectprc_datamng_obj;    
-	
+	selectprc_datamng_clss selectprc_datamng_obj;
+	backup_clss backup_obj;
+		
 	bool inter_success = true;
 	int line_counter = 0;
 	int query_counter = 0;
 	int output_counter = 0;
-	
+
 	std::vector<std::string> select_vector;
 
 	if(input_file_data.substr(input_file_data.length() - 4, 4) != ".jnq"){
@@ -589,9 +594,91 @@ int main(int argc, char* argv[]){
 					}
 				}
 			//SELECT_DATA_OP_END	
-			}else if(input_file_line.substr(0,1) == ""){
-			}else if(input_file_line.substr(0,1) == " "){
-			}else if(input_file_line.substr(0,1) == "	"){
+			}else if(input_file_line.substr(0,14) == "BACKUP-BASE->["){
+			//BACKUP_BASE_OP_START
+				std::string backup_base_backup_base_name;
+				if(find_parameter_fn(input_file_line,14,true) == "FIND_PARAMETER_LINE_ERROR"){
+					error_msg_fn("ERROR BACKUP BASE", line_counter, "TRUE USAGE 'BACKUP-BASE->[BASE_NAME]'");
+					inter_success = false;
+					break;
+				}else{backup_base_backup_base_name = find_parameter_fn(input_file_line,14,true);}
+
+				if(exists_control_fn(backup_base_backup_base_name,"NULL") == "BASE_NOT_EXISTS"){
+					error_msg_fn("ERROR BACKUP BASE", line_counter, "BASE NOT EXISTS");
+					inter_success = false;
+					break;
+				}else{
+					backup_obj.backup_base(backup_base_backup_base_name);
+					if(ssystem_control() == 1){
+						query_counter++;
+						info_msg_content = "BACKUP BASE /opt/" + backup_base_backup_base_name;
+						info_msg_fn("BACKUP",info_msg_content,query_counter);
+					}else if(ssystem_control() == 0){
+						query_counter++;
+						info_msg_content = "BACKUP BASE C:/" + backup_base_backup_base_name;
+						info_msg_fn("BACKUP",info_msg_content,query_counter);
+					}else{
+						error_msg_fn("ERROR BACKUP", line_counter, "support only linux & windows");
+						inter_success = false;
+						break;
+					}
+				}
+			//BACKUP_BASE_OP_END
+			}else if(input_file_line.substr(0,14) == "BACKUP-LOAD->["){
+			//BACKUP_LOAD_OP_START
+				std::string backup_load_base_name;
+				if(find_parameter_fn(input_file_line,14,true) == "FIND_PARAMETER_LINE_ERROR"){
+					error_msg_fn("ERROR BACKUP LOAD", line_counter, "TRUE USAGE 'BACKUP-LOAD->[BASE_NAME]'");
+					inter_success = false;
+					break;
+				}else{backup_load_base_name = find_parameter_fn(input_file_line,14,true);}
+				if(ssystem_control() == 1){
+					if(exists_control_fn(backup_load_base_name,"NULL","LINUX") != "EXISTS"){
+						error_msg_fn("ERROR BACKUP LOAD", line_counter, "BACKUP NOT EXISTS");
+						inter_success = false;
+						break;
+					}else if(exists_control_fn(backup_load_base_name,"NULL") != "BASE_NOT_EXISTS"){
+						error_msg_fn("ERROR BACKUP LOAD", line_counter, "BASE EXISTS");
+						inter_success = false;
+						break;
+					}else{
+						backup_obj.backup_load(backup_load_base_name);
+						query_counter++;
+						info_msg_content = "BACKUP LOAD ~>" + backup_load_base_name;
+						info_msg_fn("BACKUP",info_msg_content,query_counter);	
+					}
+				}else if(ssystem_control() == 0){
+					if(exists_control_fn(backup_load_base_name,"NULL","WINDOWS") != "EXISTS"){
+						error_msg_fn("ERROR BACKUP LOAD", line_counter, "BACKUP NOT EXISTS");
+						inter_success = false;
+						break;
+					}else if(exists_control_fn(backup_load_base_name,"NULL") != "BASE_NOT_EXISTS"){
+						error_msg_fn("ERROR BACKUP LOAD", line_counter, "BASE EXISTS");
+						inter_success = false;
+						break;
+					}else{
+						backup_obj.backup_load(backup_load_base_name);
+						query_counter++;
+						info_msg_content = "BACKUP LOAD ~>" + backup_load_base_name;
+						info_msg_fn("BACKUP",info_msg_content,query_counter);	
+					}
+				}else{
+					error_msg_fn("ERROR BACKUP", line_counter, "support only linux & windows");
+					inter_success = false;
+					break;
+				}
+			//BACKUP_LOAD_OP_END
+			}else if(input_file_line.substr(0,2) == "C{" || input_file_line.substr(0,2) == "c{"){
+				//COMMENT LINES
+				int comment_counter;
+				std::string commend_data;
+				while(std::getline(input_file,commend_data)){
+					line_counter++;
+					if(commend_data == "}"){break;}
+				}
+			}else if(input_file_line.substr(0,1) == ""){//NULL LINE
+			}else if(input_file_line.substr(0,1) == " "){//COMMENT LINE
+			}else if(input_file_line.substr(0,1) == "	"){//COMMENT LINE
 			}else{
 				error_msg_fn("ERROR SYNTAX",line_counter,input_file_line);
 				inter_success = false;
@@ -600,22 +687,21 @@ int main(int argc, char* argv[]){
 			line_counter++;
 		}
 		if(inter_success == true){
-			std::cout << color_success_inter_s << "\n" << "SUCCESS QUERY / " << query_counter << " QUERY" << " RAN" << color_success_inter_f << "\n";
+			std::cout << color_codes.color_success_inter_s << "\n" << "SUCCESS QUERY / " << query_counter << " QUERY" << " RAN" << color_codes.color_success_inter_f << "\n";
 			std::cout << "\n" << "[OUTPUT]" << "\n\n";
 			std::cout << "";
 			std::cout << "";
 			while(output_counter != select_vector.size()){
-				std::cout << color_output_s << "S[ "  << select_vector[output_counter] << " ]"  << color_output_f << "\n";
+				std::cout << color_codes.color_output_s << "S[ "  << select_vector[output_counter] << " ]"  << color_codes.color_output_f << "\n";
 				output_counter++;
-			}
-			return 1;
+			}return 1;
 		}else{
-			std::cout << color_error_s << "FAIL QUERY / " << query_counter << " QUERY" << " RAN" << color_error_f << "\n"; 
+			std::cout << color_codes.color_error_s << "FAIL QUERY / " << query_counter << " QUERY" << " RAN" << color_codes.color_error_f << "\n"; 
 			return 0;
 		}
 	}else{
 		error_msg_fn("ERROR FILE",0,"INPUT FILE COULD NOT BE OPENED");
-		std::cout << color_error_s << "FAIL QUERY / " << query_counter << " QUERY" << " RAN" << color_error_f << "\n";
+		std::cout << color_codes.color_error_s << "FAIL QUERY / " << query_counter << " QUERY" << " RAN" << color_codes.color_error_f << "\n";
 		return 0;
 	}
 }
