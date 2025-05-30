@@ -33,8 +33,8 @@
 
 //#define CONDITION_IF          "IF-<"
 //#define CONDITION_IF_E        ">"
-//#define CONDITION_ELSE 			  "ELSE-<"
+//#define CONDITION_ELSE        "ELSE-<"
 //#define CONDITION_ELSE_E      ">"
 
-//#define LOOP 								  "LOOP-<"
-//#define LOOP 								  ">"
+//#define LOOP                  "LOOP-<"
+//#define LOOP                  ">"
