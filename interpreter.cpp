@@ -1,4 +1,5 @@
 #include "inc.h"
+#include "directives.h"
 #include "mainbaselb.h"
 #include "tablelb.h"
 #include "datastrlb.h"
@@ -133,7 +134,7 @@ int main(int argc, char* argv[]){
 		inter_success = false;
 	}else if(input_file.is_open()){
 		while(std::getline(input_file, input_file_line)){
-			if(input_file_line.substr(0,13) == "CREATE-BASE->"){
+			if(input_file_line.substr(0,13) == CREATE_BASE){
 			//CREATE_BASE_OP_START
 				base_name = input_file_line.substr(13, input_file_line.length() - 13);
 				
@@ -148,7 +149,7 @@ int main(int argc, char* argv[]){
 					info_msg_fn("CREATE BASE",base_name,query_counter);	
 				}
 			//CREATE_BASE_OP_END
-			}else if(input_file_line.substr(0,10) == "DEL-BASE->"){
+			}else if(input_file_line.substr(0,10) == DEL_BASE){ 
 			//DEL_BASE_OP_START
 				base_name = input_file_line.substr(10, input_file_line.length() - 10);
 				
@@ -162,7 +163,7 @@ int main(int argc, char* argv[]){
 					info_msg_fn("DEL BASE",base_name,query_counter);
 				}
 			//DEL_BASE_OP_END
-			}else if(input_file_line.substr(0,14) == "CREATE-TABLE->"){
+			}else if(input_file_line.substr(0,14) == CREATE_TABLE){
 			//CREATE_TABLE_OP_START
 				std::string create_table_line_data;
 				std::getline(input_file, create_table_line_data);
@@ -250,7 +251,7 @@ int main(int argc, char* argv[]){
 					}
 				}if(inter_success == false){break;}
 			//CREATE_TABLE_OP_END
-			}else if(input_file_line.substr(0,12) == "DEL-TABLE->["){
+			}else if(input_file_line.substr(0,12) == DEL_TABLE){
 			//DEL_TABLE_OP_START
 				std::string del_table_base_name;
 				std::string del_table_table_name;
@@ -281,7 +282,7 @@ int main(int argc, char* argv[]){
 					info_msg_fn("DEL TABLE",info_msg_content,query_counter);
 				}
 			//DEL_TABLE_OP_END
-			}else if(input_file_line.substr(0,17) == "CREATE-DATASTR->["){
+			}else if(input_file_line.substr(0,17) == CREATE_DATASTR){
 			//CREATE_DATASTR_OP_START
 				std::string create_datastr_line_base_name;
 				std::string create_datastr_line_table_name;
@@ -328,7 +329,7 @@ int main(int argc, char* argv[]){
 					info_msg_fn("CREATE DATASTR",info_msg_content,query_counter);
 				}
 			//CREATE_DATASTR_OP_END
-			}else if(input_file_line.substr(0,14) == "DEL-DATASTR->["){
+			}else if(input_file_line.substr(0,14) == DEL_DATASTR){ 
 			//DEL_DATASTR_OP_START
 				std::string del_datastr_line_base_name;
 				std::string del_datastr_line_table_name;
@@ -369,7 +370,7 @@ int main(int argc, char* argv[]){
 					info_msg_fn("DEL DATASTR",info_msg_content,query_counter);
 				}
 			//DEL_DATASTR_OP_END
-			}else if(input_file_line.substr(0,14) == "INSERT-DATA->["){
+			}else if(input_file_line.substr(0,14) == INSERT_DATA){
 			//INSERT_DATA_OP_START
 				std::string insert_data_base_name;
 				std::string insert_data_table_name;
@@ -472,7 +473,7 @@ int main(int argc, char* argv[]){
 					}
 				}
 			//INSERT_DATA_OP_END
-			}else if(input_file_line.substr(0,11) == "DEL-DATA->["){			
+			}else if(input_file_line.substr(0,11) == DEL_DATA){ 
 			//DEL_DATA_OP_START
 				std::string del_data_base_name;
 				std::string del_data_table_name;
@@ -535,7 +536,7 @@ int main(int argc, char* argv[]){
 					}
 				}
 			//DEL_DATA_OP_END
-			}else if(input_file_line.substr(0,14) == "SELECT-DATA->["){
+			}else if(input_file_line.substr(0,14) == SELECT_DATA){  
 			//SELECT_DATA_OP_START
 				std::string select_data_base_name;
 				std::string select_data_table_name;
@@ -594,7 +595,7 @@ int main(int argc, char* argv[]){
 					}
 				}
 			//SELECT_DATA_OP_END	
-			}else if(input_file_line.substr(0,14) == "BACKUP-BASE->["){
+			}else if(input_file_line.substr(0,14) == BACKUP_BASE){ 
 			//BACKUP_BASE_OP_START
 				std::string backup_base_backup_base_name;
 				if(find_parameter_fn(input_file_line,14,true) == "FIND_PARAMETER_LINE_ERROR"){
@@ -624,7 +625,7 @@ int main(int argc, char* argv[]){
 					}
 				}
 			//BACKUP_BASE_OP_END
-			}else if(input_file_line.substr(0,14) == "BACKUP-LOAD->["){
+			}else if(input_file_line.substr(0,14) == BACKUP_LOAD){ // change 
 			//BACKUP_LOAD_OP_START
 				std::string backup_load_base_name;
 				if(find_parameter_fn(input_file_line,14,true) == "FIND_PARAMETER_LINE_ERROR"){

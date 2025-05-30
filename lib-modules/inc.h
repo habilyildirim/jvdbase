@@ -1,6 +1,5 @@
 #ifndef INC_H
 #define INC_H
-#define BASE_PATH "test/"
 
 #include <iostream>
 #include <fstream>
@@ -10,6 +9,8 @@
 #include <vector>
 #include <string>
 #include <cstdio>
+
+#define BASE_PATH "test/"
 
 uint8_t ssystem_control(){
 	#if defined(__linux__)
