@@ -179,13 +179,13 @@ int main(int argc, char* argv[]){
 				
 					while(std::getline(input_file, create_table_line_data)){
 						line_counter++;
-						if(create_table_line_data.substr(0,11) != "BASE-NAME->" && first_work_create_table == true){							
+						if(create_table_line_data.substr(0,11) != BASE_NAME_FOR_CREATE_TABLE && first_work_create_table == true){
 							error_msg_fn("ERROR CREATE TABLE", line_counter, "MISSING PARAMETER-BASE NAME MUST BE SPECIFIED FIRST");
 							inter_success = false;
 							break;
 						}else if(first_work_create_table == true){
 							create_table_base_name = create_table_line_data.substr(11, create_table_line_data.length() - 11);
-						}else if(create_table_line_data.substr(0,12) != "TABLE-NAME->" && control_counter == 2){							
+						}else if(create_table_line_data.substr(0,12) != TABLE_NAME_FOR_CREATE_TABLE && control_counter == 2){ 
 							error_msg_fn("ERROR CREATE TABLE", line_counter, "MISSING PARAMETER-TABLE NAME MUST BE SPECIFIED SECOND");
 							inter_success = false;
 							break;
@@ -216,7 +216,7 @@ int main(int argc, char* argv[]){
 									main_table_obj.create_table(create_table_base_name, create_table_table_name);
 								}
 							}
-						}else if(create_table_line_data.substr(0,16) == "CREATE-DATASTR->"){
+						}else if(create_table_line_data.substr(0,16) == CREATE_DATASTR_FOR_CREATE_TABLE){ // change
 							std::string create_table_datastr_name = create_table_line_data.substr(16, create_table_datastr_name.length() - 16);
 							if(create_table_datastr_name.substr(0,1) == ""){
 								error_msg_fn("ERROR CREATE TABLE", line_counter, "DATASTR PARAMETER IS NULL");
