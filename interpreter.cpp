@@ -1,9 +1,9 @@
 #include "inc.h"
 #include "directives.h"
-#include "mainbaselb.h"
-#include "tablelb.h"
-#include "datastrlb.h"
-#include "datamnglb.h"
+#include "mainbaselb.cpp"
+#include "tablelb.cpp"
+#include "datastrlb.cpp"
+#include "datamnglb.cpp"
 
 const std::string base_path_interpreter = BASE_PATH;
 uint8_t ssystem_control();
