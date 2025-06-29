@@ -12,7 +12,7 @@
 
 #define BASE_PATH "test/"
 
-uint8_t ssystem_control(){
+uint8_t ssystem_control() {
 	#if defined(__linux__)
 		return 1;
 	#elif defined(_WIN32) || defined(_WIN64)
@@ -22,7 +22,7 @@ uint8_t ssystem_control(){
 	#endif
 }
 
-struct color_codes_strc{
+struct color_codes_strc {
     std::string color_success_inter_s = "\033[32m"; 
     std::string color_success_inter_f = "\033[0m";  
     std::string color_error_s = "\033[31m";

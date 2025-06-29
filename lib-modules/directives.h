@@ -1,3 +1,6 @@
+//VER
+#define VERSION "v0.0.9"
+
 /**/
 #define CREATE_BASE                        "CREATE-BASE->"
 #define DEL_BASE                           "DEL-BASE->"
